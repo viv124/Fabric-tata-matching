@@ -1,0 +1,32 @@
+{
+    "name": "Tata Matching Center - Best Fabric Shop in Bilimora",
+    "short_name": "Tata Matching Center",
+    "description": "Premier fabric shop in Bilimora offering premium kapad, astar, and textile collection",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#8B4513",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/tata_matching_icon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/tata_matching_icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": [
+        "shopping",
+        "business",
+        "fashion"
+    ],
+    "lang": "en",
+    "scope": "/",
+    "id": "tata-matching-center"
+}
