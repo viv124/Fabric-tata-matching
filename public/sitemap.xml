@@ -49,4 +49,33 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- New Location-Specific Pages -->
+  <url>
+    <loc>https://tata-matching-center.vercel.app/kapda-bazar-bilimora</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://tata-matching-center.vercel.app/best-fabric-near-me</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://tata-matching-center.vercel.app/near-fabric-shop-bilimora</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://tata-matching-center.vercel.app/kapda-bazar-navsari</loc>
+    <lastmod>2024-12-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
