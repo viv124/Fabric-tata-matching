@@ -1,6 +1,5 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, MessageCircle, MapPin } from "lucide-react";
+import { ShoppingBag, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/homepage.jpg";
 import shopBackground from "@/assets/homepage.jpg";

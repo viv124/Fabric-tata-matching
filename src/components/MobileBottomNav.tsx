@@ -1,4 +1,3 @@
-import React from "react";
 import { Button } from "@/components/ui/button";
 import { Home, Search, ShoppingBag, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
@@ -7,13 +6,11 @@ import { useAuth } from "@/contexts/AuthContext";
 interface MobileBottomNavProps {
   onSearchClick?: () => void;
   onFilterClick?: () => void;
-  onWishlistClick?: () => void;
 }
 
 export const MobileBottomNav = ({ 
   onSearchClick, 
-  onFilterClick, 
-  onWishlistClick
+  onFilterClick
 }: MobileBottomNavProps) => {
   const location = useLocation();
   const { isAdmin } = useAuth();

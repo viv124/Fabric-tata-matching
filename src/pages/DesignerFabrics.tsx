@@ -69,7 +69,6 @@ const DesignerFabrics = () => {
         <MobileBottomNav
           onSearchClick={() => setShowFilters(true)}
           onFilterClick={() => setShowFilters(true)}
-          onWishlistClick={() => setShowFilters(true)}
         />
       )}
 

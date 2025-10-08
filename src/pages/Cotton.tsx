@@ -75,7 +75,6 @@ const Cotton = () => {
         <MobileBottomNav
           onSearchClick={() => setShowFilters(true)}
           onFilterClick={() => setShowFilters(true)}
-          onWishlistClick={() => setShowFilters(true)}
         />
       )}
 

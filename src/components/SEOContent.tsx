@@ -1,4 +1,3 @@
-import React from "react";
 import instagramLogo from "/instgram_logo.png";
 import pinterestLogo from "/pinterest_logo.png";
 
