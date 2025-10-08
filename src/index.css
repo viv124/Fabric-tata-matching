@@ -282,11 +282,35 @@
     .mobile-filter-container {
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
+      scroll-behavior: smooth;
     }
 
     .mobile-input-focus {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Mobile filter modal animations */
+    .mobile-filter-modal {
+      animation: slideInFromBottom 0.3s ease-out;
+    }
+
+    @keyframes slideInFromBottom {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Mobile filter backdrop */
+    .mobile-filter-backdrop {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
     }
   }
 

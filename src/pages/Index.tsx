@@ -194,10 +194,17 @@ const Index = () => {
 
       {/* Mobile Filters Modal */}
       {isMobile && showFilters && (
-        <EnhancedFilters
-          isMobile={true}
-          onClose={() => setShowFilters(false)}
-        />
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 z-40 mobile-filter-backdrop"
+            onClick={() => setShowFilters(false)}
+          />
+          <EnhancedFilters
+            isMobile={true}
+            onClose={() => setShowFilters(false)}
+          />
+        </>
       )}
     </div>
   );

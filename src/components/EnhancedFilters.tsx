@@ -152,18 +152,18 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
   const topOffers = fabricItems.filter(item => item.discount > 0).slice(0, 6);
 
   return (
-    <div className={`${isMobile ? 'fixed inset-0 z-50 bg-background flex flex-col' : ''}`}>
+    <div className={`${isMobile ? 'fixed inset-0 z-50 bg-background flex flex-col mobile-filter-modal' : ''}`}>
       {isMobile && (
-        <div className="flex items-center justify-between p-4 border-b bg-background flex-shrink-0">
+        <div className="flex items-center justify-between p-4 border-b bg-background/95 backdrop-blur-sm flex-shrink-0 sticky top-0 z-10">
           <h2 className="text-lg font-semibold">Filters & Search</h2>
-          <Button variant="ghost" size="icon" onClick={onClose}>
+          <Button variant="ghost" size="icon" onClick={onClose} className="touch-friendly">
             <X className="h-4 w-4" />
           </Button>
         </div>
       )}
       
-      <div className={`${isMobile ? 'flex-1 overflow-y-auto p-4 pb-20 mobile-filter-container' : ''}`}>
-        <div className="space-y-6">
+      <div className={`${isMobile ? 'flex-1 overflow-y-auto p-4 pb-24 mobile-filter-container' : ''}`}>
+        <div className={`space-y-6 ${isMobile ? 'space-y-8' : ''}`}>
           
           {/* Search Bar */}
           <div className="space-y-2">
@@ -171,9 +171,16 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search by name, description, category, material, color..."
+                placeholder="Search fabrics... (e.g., 'silk red', 'cotton dress', 'wedding')"
                 value={searchQuery}
                 onChange={(e) => handleSearch(e.target.value)}
+                onKeyDown={(e) => {
+                  // Handle Enter key to dismiss keyboard on mobile
+                  if (e.key === 'Enter' && isMobile) {
+                    e.preventDefault();
+                    (e.target as HTMLElement).blur();
+                  }
+                }}
                 onBlur={() => {
                   // Dismiss keyboard on mobile after typing
                   if (isMobile) {
@@ -204,6 +211,13 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
                     pattern="[0-9]*"
                     value={priceRange[0]}
                     onChange={(e) => handleMinPriceInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      // Handle Enter key to dismiss keyboard on mobile
+                      if (e.key === 'Enter' && isMobile) {
+                        e.preventDefault();
+                        (e.target as HTMLElement).blur();
+                      }
+                    }}
                     onBlur={() => {
                       // Dismiss keyboard on mobile after typing
                       if (isMobile) {
@@ -223,6 +237,13 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
                     pattern="[0-9]*"
                     value={priceRange[1]}
                     onChange={(e) => handleMaxPriceInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      // Handle Enter key to dismiss keyboard on mobile
+                      if (e.key === 'Enter' && isMobile) {
+                        e.preventDefault();
+                        (e.target as HTMLElement).blur();
+                      }
+                    }}
                     onBlur={() => {
                       // Dismiss keyboard on mobile after typing
                       if (isMobile) {
@@ -257,12 +278,12 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
               <Palette className="h-4 w-4" />
               Colors
             </Label>
-            <div className="grid grid-cols-6 sm:grid-cols-8 gap-2">
+            <div className={`grid gap-2 ${isMobile ? 'grid-cols-5' : 'grid-cols-6 sm:grid-cols-8'}`}>
               {fabricColors.map((color) => (
                 <button
                   key={color.value}
                   onClick={() => handleColorToggle(color.value)}
-                  className={`relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 transition-all duration-200 hover:scale-110 ${
+                  className={`relative ${isMobile ? 'w-12 h-12' : 'w-10 h-10 sm:w-12 sm:h-12'} rounded-full border-2 transition-all duration-200 hover:scale-110 touch-friendly ${
                     selectedColors.includes(color.value)
                       ? 'border-accent ring-2 ring-accent/20'
                       : 'border-border hover:border-accent/50'
@@ -344,12 +365,12 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
           {/* Category Pills */}
           <div className="space-y-3">
             <Label className="text-sm font-medium">Categories</Label>
-            <div className="flex flex-wrap gap-2 sm:gap-3">
+            <div className={`flex flex-wrap gap-2 ${isMobile ? 'gap-2' : 'sm:gap-3'}`}>
               <Button
                 variant={!filters.category || filters.category === "all" ? "default" : "outline"}
                 size="sm"
                 onClick={() => updateFilters({ category: undefined })}
-                className="rounded-full px-3 py-2 text-sm"
+                className="rounded-full px-3 py-2 text-sm touch-friendly"
               >
                 <Tag className="h-3 w-3 mr-1" />
                 All Fabrics
@@ -360,7 +381,7 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
                   variant={filters.category === category.name ? "default" : "outline"}
                   size="sm"
                   onClick={() => updateFilters({ category: category.name })}
-                  className="rounded-full px-3 py-2 text-sm"
+                  className="rounded-full px-3 py-2 text-sm touch-friendly"
                 >
                   {category.name}
                 </Button>
@@ -369,7 +390,7 @@ export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: Enha
                 variant={filters.featured === true ? "default" : "outline"}
                 size="sm"
                 onClick={() => updateFilters({ featured: filters.featured === true ? undefined : true })}
-                className="rounded-full px-3 py-2 text-sm"
+                className="rounded-full px-3 py-2 text-sm touch-friendly"
               >
                 <Star className="h-3 w-3 mr-1" />
                 Featured

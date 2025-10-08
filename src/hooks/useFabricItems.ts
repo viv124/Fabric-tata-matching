@@ -117,8 +117,53 @@ export const useFabricItems = () => {
     ]);
   };
 
+  // Calculate search relevance score for better matching
+  const calculateSearchScore = (item: FabricItem, searchTerms: string[]): number => {
+    let score = 0;
+    const searchableFields = [
+      { text: item.name?.toLowerCase() || '', weight: 10 },
+      { text: item.description?.toLowerCase() || '', weight: 5 },
+      { text: item.category?.toLowerCase() || '', weight: 8 },
+      { text: item.material?.toLowerCase() || '', weight: 6 },
+      { text: item.color?.toLowerCase() || '', weight: 4 },
+      { text: item.pattern?.toLowerCase() || '', weight: 3 }
+    ];
+
+    searchTerms.forEach(term => {
+      searchableFields.forEach(field => {
+        if (field.text.includes(term)) {
+          // Exact match gets higher score
+          if (field.text === term) {
+            score += field.weight * 3;
+          }
+          // Starts with gets medium score
+          else if (field.text.startsWith(term)) {
+            score += field.weight * 2;
+          }
+          // Contains gets base score
+          else {
+            score += field.weight;
+          }
+        }
+      });
+    });
+
+    // Bonus for featured items
+    if (item.featured) {
+      score += 5;
+    }
+
+    // Bonus for items with discount
+    if (item.discount > 0) {
+      score += 2;
+    }
+
+    return score;
+  };
+
   const fetchFabricItems = async () => {
     try {
+      console.log('Fetching fabric items with filters:', filters);
       let query = supabase
         .from('fabric_items')
         .select('*');
@@ -133,11 +178,23 @@ export const useFabricItems = () => {
       // constrain by base price at the database level here.
       
       if (filters.color) {
-        query = query.ilike('color', `%${filters.color}%`);
+        // Handle multiple colors separated by commas
+        const colors = filters.color.split(',').map(c => c.trim());
+        if (colors.length === 1) {
+          query = query.ilike('color', `%${colors[0]}%`);
+        } else {
+          // For multiple colors, use OR condition
+          const colorConditions = colors.map(color => `color.ilike.%${color}%`).join(',');
+          query = query.or(colorConditions);
+        }
       }
       
       if (filters.material) {
-        query = query.ilike('material', `%${filters.material}%`);
+        // Better material matching - handle partial matches
+        const materialTerm = filters.material.trim();
+        if (materialTerm) {
+          query = query.ilike('material', `%${materialTerm}%`);
+        }
       }
       
       if (filters.featured !== undefined) {
@@ -145,7 +202,23 @@ export const useFabricItems = () => {
       }
       
       if (filters.searchQuery) {
-        query = query.or(`name.ilike.%${filters.searchQuery}%,description.ilike.%${filters.searchQuery}%,category.ilike.%${filters.searchQuery}%,material.ilike.%${filters.searchQuery}%,color.ilike.%${filters.searchQuery}%,pattern.ilike.%${filters.searchQuery}%`);
+        const searchTerm = filters.searchQuery.trim();
+        if (searchTerm) {
+          // Use full-text search with better matching
+          // Split search terms for better matching
+          const searchTerms = searchTerm.split(/\s+/).filter(term => term.length > 0);
+          
+          if (searchTerms.length === 1) {
+            // Single term - use ilike for partial matching
+            query = query.or(`name.ilike.%${searchTerm}%,description.ilike.%${searchTerm}%,category.ilike.%${searchTerm}%,material.ilike.%${searchTerm}%,color.ilike.%${searchTerm}%,pattern.ilike.%${searchTerm}%`);
+          } else {
+            // Multiple terms - use AND logic for better matching
+            const searchConditions = searchTerms.map(term => 
+              `(name.ilike.%${term}%,description.ilike.%${term}%,category.ilike.%${term}%,material.ilike.%${term}%,color.ilike.%${term}%,pattern.ilike.%${term}%)`
+            ).join(',');
+            query = query.or(searchConditions);
+          }
+        }
       }
 
       // Apply sorting based on sortBy filter
@@ -246,6 +319,19 @@ export const useFabricItems = () => {
         });
       }
 
+      // Client-side search ranking for better relevance
+      if (filters.searchQuery && filters.searchQuery.trim()) {
+        const searchTerm = filters.searchQuery.trim().toLowerCase();
+        const searchTerms = searchTerm.split(/\s+/).filter(term => term.length > 0);
+        
+        filteredItems.sort((a, b) => {
+          const scoreA = calculateSearchScore(a, searchTerms);
+          const scoreB = calculateSearchScore(b, searchTerms);
+          return scoreB - scoreA; // Higher score first
+        });
+      }
+
+      console.log('Filtered items count:', filteredItems.length);
       setFabricItems(filteredItems);
     } catch (error) {
       console.error('Error fetching fabric items:', error);
