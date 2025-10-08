@@ -36,7 +36,7 @@ export const FabricUpload = ({ onClose, onSubmit }: FabricUploadProps) => {
     instagramUrl: "",
     pinterestUrl: "",
     otherLink: "",
-    musicId: "",
+    musicId: "none",
   });
 
   React.useEffect(() => {
@@ -132,7 +132,7 @@ export const FabricUpload = ({ onClose, onSubmit }: FabricUploadProps) => {
         instagram_url: formData.instagramUrl?.trim() || null,
         pinterest_url: formData.pinterestUrl?.trim() || null,
         other_link: formData.otherLink?.trim() || null,
-        music_id: formData.musicId || null,
+        music_id: formData.musicId && formData.musicId !== "none" ? formData.musicId : null,
       });
 
       if (newItem) {
@@ -351,7 +351,7 @@ export const FabricUpload = ({ onClose, onSubmit }: FabricUploadProps) => {
                     <SelectValue placeholder="Select music (optional)" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">No music</SelectItem>
+                    <SelectItem value="none">No music</SelectItem>
                     {musicFiles.map((music) => (
                       <SelectItem key={music.id} value={music.id}>
                         {music.name}
@@ -452,7 +452,10 @@ export const FabricUpload = ({ onClose, onSubmit }: FabricUploadProps) => {
               </p>
               
               <MultipleImageUpload
-                onImagesUploaded={(urls) => setAdditionalImages(urls)}
+                onImagesUploaded={(urls) => {
+                  console.log('Images uploaded:', urls);
+                  setAdditionalImages(urls);
+                }}
                 maxImages={10}
               />
             </div>
