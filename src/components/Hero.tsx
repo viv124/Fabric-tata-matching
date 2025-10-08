@@ -1,9 +1,11 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, MessageCircle, MapPin, Instagram } from "lucide-react";
+import { ShoppingBag, MessageCircle, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/homepage.jpg";
 import shopBackground from "@/assets/homepage.jpg";
+import instagramLogo from "/instgram_logo.png";
+import pinterestLogo from "/pinterest_logo.png";
 
 export const Hero = () => {
   const scrollToGallery = () => {
@@ -105,24 +107,30 @@ export const Hero = () => {
           </div>
         </div>
         
-        {/* Social Media Links */}
-        <div className="bg-black/20 backdrop-blur-lg rounded-3xl p-6 sm:p-8 mb-8 sm:mb-10 border border-white/10 shadow-boutique">
-          <h3 className="text-accent font-serif font-medium text-lg mb-6 text-center">Connect With Us</h3>
-          <div className="flex justify-center gap-8">
+        {/* Connect With Us - Social Media Links */}
+        <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 sm:p-8 mb-8 sm:mb-10 border border-white/20 shadow-2xl">
+          <h3 className="text-white font-serif font-semibold text-xl mb-8 text-center">Connect With Us</h3>
+          <div className="flex justify-center gap-6 sm:gap-8">
             <a 
               href="https://www.instagram.com/tata_matching_center/?hl=en" 
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="Follow us on Instagram"
-              className="group relative"
+              className="group flex flex-col items-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-purple-600 via-pink-500 to-orange-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-              <div className="relative w-20 h-20 bg-gradient-to-tr from-purple-600 via-pink-500 to-orange-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <Instagram className="w-10 h-10 text-white" strokeWidth={2} />
+              <div className="relative mb-4">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                <div className="relative w-20 h-20 bg-white rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-xl border-2 border-white/20">
+                  <img 
+                    src={instagramLogo} 
+                    alt="Instagram" 
+                    className="w-16 h-16 object-contain"
+                  />
+                </div>
               </div>
-              <div className="text-center mt-3">
-                <span className="text-white text-sm font-semibold block">Instagram</span>
-                <span className="text-white/70 text-xs">@tata_matching_center</span>
+              <div className="text-center">
+                <span className="text-white text-base font-semibold block mb-1">Instagram</span>
+                <span className="text-white/80 text-sm">@tata_matching_center</span>
               </div>
             </a>
             
@@ -131,17 +139,21 @@ export const Hero = () => {
               target="_blank" 
               rel="noopener noreferrer"
               aria-label="Follow us on Pinterest"
-              className="group relative"
+              className="group flex flex-col items-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-              <div className="relative w-20 h-20 bg-gradient-to-br from-red-600 to-red-700 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                <svg className="w-10 h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 19c-.721 0-1.418-.109-2.073-.312.286-.465.713-1.233.713-1.233.389.233.744.373 1.25.373 1.641 0 2.828-1.5 2.828-3.5 0-1.5-1.25-2.5-2.5-2.5-1.5 0-2.5 1-2.5 2.5 0 .5.25 1 .5 1.25.25.5.25.75.25 1.25 0 .5-.25 1-.5 1.25-.25.5-.5.75-.5 1.25 0 1.5 1.25 2.5 2.5 2.5 1.5 0 2.5-1 2.5-2.5 0-.5-.25-1-.5-1.25-.25-.5-.25-.75-.25-1.25 0-.5.25-1 .5-1.25.25-.5.5-.75.5-1.25 0-1.5-1.25-2.5-2.5-2.5z"/>
-                </svg>
+              <div className="relative mb-4">
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+                <div className="relative w-20 h-20 bg-white rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-xl border-2 border-white/20">
+                  <img 
+                    src={pinterestLogo} 
+                    alt="Pinterest" 
+                    className="w-16 h-16 object-contain"
+                  />
+                </div>
               </div>
-              <div className="text-center mt-3">
-                <span className="text-white text-sm font-semibold block">Pinterest</span>
-                <span className="text-white/70 text-xs">tatamatchingcenter</span>
+              <div className="text-center">
+                <span className="text-white text-base font-semibold block mb-1">Pinterest</span>
+                <span className="text-white/80 text-sm">tatamatchingcenter</span>
               </div>
             </a>
           </div>

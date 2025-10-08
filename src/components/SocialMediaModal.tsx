@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { X, Instagram, ExternalLink, Link, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ExternalLink, Link, ChevronLeft, ChevronRight } from "lucide-react";
+import instagramLogo from "/instgram_logo.png";
+import pinterestLogo from "/pinterest_logo.png";
 import { FabricItem } from "@/hooks/useFabricItems";
 import { ImageGalleryModal } from "./ImageGalleryModal";
 import { MultipleImageViewer } from "./MultipleImageViewer";
@@ -121,7 +123,7 @@ export const SocialMediaModal = ({ item, onClose }: SocialMediaModalProps) => {
                     <div className="p-3 sm:p-4 bg-muted/30 rounded-lg">
                       <div className="flex items-center justify-between mb-3">
                         <Badge className="bg-gradient-to-r from-purple-500 to-pink-500">
-                          <Instagram className="h-4 w-4 mr-1" />
+                          <img src={instagramLogo} alt="Instagram" className="h-4 w-4 mr-1 object-contain" />
                           Instagram Reel
                         </Badge>
                         <Button
@@ -134,7 +136,7 @@ export const SocialMediaModal = ({ item, onClose }: SocialMediaModalProps) => {
                         </Button>
                       </div>
                       <div className="w-full bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-4 text-center">
-                        <Instagram className="h-12 w-12 mx-auto mb-3 text-purple-500" />
+                        <img src={instagramLogo} alt="Instagram" className="h-12 w-12 mx-auto mb-3 object-contain" />
                         <p className="text-sm text-muted-foreground mb-3">
                           View this fabric showcase on Instagram
                         </p>
@@ -142,7 +144,7 @@ export const SocialMediaModal = ({ item, onClose }: SocialMediaModalProps) => {
                           onClick={() => window.open(item.instagram_url!, '_blank', 'noopener,noreferrer')}
                           className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 w-full"
                         >
-                          <Instagram className="h-4 w-4 mr-2" />
+                          <img src={instagramLogo} alt="Instagram" className="h-4 w-4 mr-2 object-contain" />
                           View Instagram Reel
                         </Button>
                       </div>
@@ -154,7 +156,7 @@ export const SocialMediaModal = ({ item, onClose }: SocialMediaModalProps) => {
                     <div className="p-3 sm:p-4 bg-muted/30 rounded-lg">
                       <div className="flex items-center justify-between mb-3">
                         <Badge className="bg-red-600">
-                          <div className="h-4 w-4 bg-white rounded-sm mr-1" />
+                          <img src={pinterestLogo} alt="Pinterest" className="h-4 w-4 mr-1 object-contain" />
                           Pinterest
                         </Badge>
                         <Button
@@ -167,9 +169,7 @@ export const SocialMediaModal = ({ item, onClose }: SocialMediaModalProps) => {
                         </Button>
                       </div>
                       <div className="w-full bg-gradient-to-br from-red-50 to-pink-50 rounded-lg p-4 text-center">
-                        <div className="h-12 w-12 mx-auto mb-3 bg-red-500 rounded-lg flex items-center justify-center">
-                          <span className="text-white text-xl font-bold">P</span>
-                        </div>
+                        <img src={pinterestLogo} alt="Pinterest" className="h-12 w-12 mx-auto mb-3 object-contain" />
                         <p className="text-sm text-muted-foreground mb-3">
                           View this fabric inspiration on Pinterest
                         </p>
@@ -177,9 +177,7 @@ export const SocialMediaModal = ({ item, onClose }: SocialMediaModalProps) => {
                           onClick={() => window.open(item.pinterest_url!, '_blank', 'noopener,noreferrer')}
                           className="bg-red-600 hover:bg-red-700 w-full"
                         >
-                          <div className="h-4 w-4 bg-white rounded-sm mr-2 flex items-center justify-center">
-                            <span className="text-red-600 text-xs font-bold">P</span>
-                          </div>
+                          <img src={pinterestLogo} alt="Pinterest" className="h-4 w-4 mr-2 object-contain" />
                           View Pinterest Pin
                         </Button>
                       </div>
