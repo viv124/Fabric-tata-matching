@@ -25,14 +25,12 @@ export const FeaturedSlideshow = ({ onItemClick }: FeaturedSlideshowProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Get featured items or top items with discounts
+  // Get only featured items
   const featuredItems = React.useMemo(() => {
     return fabricItems
-      .filter(item => item.featured || item.discount > 0)
+      .filter(item => item.featured === true)
       .sort((a, b) => {
-        // Sort by featured first, then by discount
-        if (a.featured && !b.featured) return -1;
-        if (!a.featured && b.featured) return 1;
+        // Sort by discount (highest first) for featured items
         return b.discount - a.discount;
       })
       .slice(0, 8); // Show top 8 featured items
