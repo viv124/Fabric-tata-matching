@@ -22,6 +22,7 @@ export interface FabricItem {
   music_id: string | null;
   created_at: string;
   updated_at: string;
+  additional_images?: string[]; // Additional images for the fabric item
 }
 
 export interface FabricCategory {
@@ -198,11 +199,36 @@ export const useFabricItems = () => {
 
       let items = (data || []) as FabricItem[];
 
+      // Fetch additional images for each item
+      const itemsWithImages = await Promise.all(
+        items.map(async (item) => {
+          try {
+            const { data: additionalImages } = await supabase
+              .from('fabric_item_images')
+              .select('image_url')
+              .eq('fabric_item_id', item.id)
+              .order('sort_order', { ascending: true });
+
+            return {
+              ...item,
+              additional_images: additionalImages?.map(img => img.image_url) || []
+            };
+          } catch (error) {
+            console.error(`Error fetching additional images for item ${item.id}:`, error);
+            return {
+              ...item,
+              additional_images: []
+            };
+          }
+        })
+      );
+
       // Client-side filter: effective price within range
       const hasMin = filters.minPrice !== undefined;
       const hasMax = filters.maxPrice !== undefined;
+      let filteredItems = itemsWithImages;
       if (hasMin || hasMax) {
-        items = items.filter((item) => {
+        filteredItems = itemsWithImages.filter((item) => {
           const effectivePrice = item.price * (1 - (item.discount || 0) / 100);
           if (hasMin && effectivePrice < (filters.minPrice as number)) return false;
           if (hasMax && effectivePrice > (filters.maxPrice as number)) return false;
@@ -212,7 +238,7 @@ export const useFabricItems = () => {
 
       // Client-side sort by effective price if requested
       if (willSortByEffectivePrice && filters.sortBy) {
-        items = items.slice().sort((a, b) => {
+        filteredItems.sort((a, b) => {
           const ea = a.price * (1 - (a.discount || 0) / 100);
           const eb = b.price * (1 - (b.discount || 0) / 100);
           if (filters.sortBy === 'price-low') return ea - eb;
@@ -220,7 +246,7 @@ export const useFabricItems = () => {
         });
       }
 
-      setFabricItems(items);
+      setFabricItems(filteredItems);
     } catch (error) {
       console.error('Error fetching fabric items:', error);
       toast.error('Failed to load fabric items');

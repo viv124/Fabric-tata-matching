@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Instagram, Youtube, ExternalLink, ArrowUpDown } from "lucide-react";
 import { useFabricItems, FabricItem } from "@/hooks/useFabricItems";
+import { MultipleImageViewer } from "./MultipleImageViewer";
 
 interface FabricGalleryProps {
   onItemClick: (item: FabricItem) => void;
@@ -103,13 +104,12 @@ export const FabricGallery = ({ onItemClick }: FabricGalleryProps) => {
               onClick={() => onItemClick(item)}
               style={{animationDelay: `${index * 100}ms`}}
             >
-              <div className="aspect-square overflow-hidden image-boutique">
-                <img
-                  src={item.image_url}
-                  alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-              </div>
+              <MultipleImageViewer
+                mainImage={item.image_url}
+                additionalImages={item.additional_images || []}
+                itemName={item.name}
+                className="aspect-square"
+              />
               
               <div className="p-4 sm:p-6 space-y-4">
                 <h3 className="font-serif font-semibold text-lg sm:text-xl mb-2 group-hover:text-primary transition-colors line-clamp-1">

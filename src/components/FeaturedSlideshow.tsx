@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Play, Pause, Star, Volume2, VolumeX, Upload, Music } from "lucide-react";
 import { useFabricItems, FabricItem } from "@/hooks/useFabricItems";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { MultipleImageViewer } from "./MultipleImageViewer";
 
 interface FeaturedSlideshowProps {
   onItemClick: (item: FabricItem) => void;
@@ -405,10 +406,11 @@ export const FeaturedSlideshow = ({ onItemClick }: FeaturedSlideshowProps) => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="aspect-square overflow-hidden image-boutique relative">
-                  <img
-                    src={item.image_url}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  <MultipleImageViewer
+                    mainImage={item.image_url}
+                    additionalImages={item.additional_images || []}
+                    itemName={item.name}
+                    className="w-full h-full"
                   />
                   
                   {/* Featured Badge */}

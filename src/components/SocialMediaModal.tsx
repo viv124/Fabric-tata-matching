@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { X, Instagram, ExternalLink, Link, ChevronLeft, ChevronRight } from "lucide-react";
 import { FabricItem } from "@/hooks/useFabricItems";
 import { ImageGalleryModal } from "./ImageGalleryModal";
+import { MultipleImageViewer } from "./MultipleImageViewer";
 import { supabase } from "@/integrations/supabase/client";
 
 interface SocialMediaModalProps {
@@ -231,37 +232,11 @@ export const SocialMediaModal = ({ item, onClose }: SocialMediaModalProps) => {
             {allImages.length > 0 && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold">Product Images ({allImages.length})</h3>
-                <div className="space-y-3">
-                  {/* Main Image */}
-                  <div className="aspect-square rounded-xl overflow-hidden shadow-medium cursor-pointer" onClick={() => handleImageClick(0)}>
-                    <img
-                      src={item.image_url}
-                      alt={item.name}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  
-                  {/* Additional Images Horizontal Scroll */}
-                  {additionalImages.length > 0 && (
-                    <div className="relative">
-                      <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-primary scrollbar-track-muted">
-                        {additionalImages.map((imageUrl, index) => (
-                          <div
-                            key={index}
-                            className="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden shadow-sm cursor-pointer border-2 border-border hover:border-primary transition-all"
-                            onClick={() => handleImageClick(index + 1)}
-                          >
-                            <img
-                              src={imageUrl}
-                              alt={`${item.name} - Image ${index + 2}`}
-                              className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <MultipleImageViewer
+                  mainImage={item.image_url}
+                  additionalImages={additionalImages}
+                  itemName={item.name}
+                />
               </div>
             )}
             
