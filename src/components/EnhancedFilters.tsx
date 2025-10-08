@@ -8,10 +8,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Search, Filter, X, Star, Tag, Palette, SlidersHorizontal } from "lucide-react";
 import { useFabricItems, FabricFilters } from "@/hooks/useFabricItems";
+import { HorizontalOfferGrid } from "./HorizontalOfferGrid";
 
 interface EnhancedFiltersProps {
   onClose?: () => void;
   isMobile?: boolean;
+  onItemClick?: (item: any) => void;
 }
 
 const fabricColors = [
@@ -42,7 +44,7 @@ const sortOptions = [
   { value: "popular", label: "Most Popular" },
 ];
 
-export const EnhancedFilters = ({ onClose, isMobile = false }: EnhancedFiltersProps) => {
+export const EnhancedFilters = ({ onClose, isMobile = false, onItemClick }: EnhancedFiltersProps) => {
   const { categories, filters, updateFilters, clearFilters, fabricItems } = useFabricItems();
   const [searchQuery, setSearchQuery] = useState(filters.searchQuery || "");
   
@@ -147,7 +149,7 @@ export const EnhancedFilters = ({ onClose, isMobile = false }: EnhancedFiltersPr
     }).length;
   };
 
-  const topOffers = fabricItems.filter(item => item.discount > 0).slice(0, 3);
+  const topOffers = fabricItems.filter(item => item.discount > 0).slice(0, 6);
 
   return (
     <div className={`${isMobile ? 'fixed inset-0 z-50 bg-background flex flex-col' : ''}`}>
@@ -405,42 +407,15 @@ export const EnhancedFilters = ({ onClose, isMobile = false }: EnhancedFiltersPr
           </div>
 
           {/* Top Offers Section */}
-          {topOffers.length > 0 && (
-            <Card className="card-gradient border-accent/20">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-2 mb-4">
-                  <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white">
-                    🔥 Top Offers
-                  </Badge>
-                  <span className="text-sm text-muted-foreground">Limited time deals</span>
-                </div>
-                <div className="space-y-3">
-                  {topOffers.map((item) => (
-                    <div key={item.id} className="flex items-center gap-3 p-3 bg-muted/30 rounded-xl hover:bg-muted/50 transition-colors">
-                      <img 
-                        src={item.image_url} 
-                        alt={item.name}
-                        className="w-12 h-12 object-cover rounded-lg"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium text-sm line-clamp-1">{item.name}</p>
-                        <div className="flex items-center gap-2">
-                          <span className="text-lg font-bold text-primary">
-                            ₹{(item.price * (1 - item.discount / 100)).toFixed(0)}
-                          </span>
-                          <span className="text-xs text-muted-foreground line-through">
-                            ₹{item.price.toFixed(0)}
-                          </span>
-                          <Badge className="text-xs bg-red-500 text-white">
-                            -{item.discount}%
-                          </Badge>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+          {onItemClick && (
+            <HorizontalOfferGrid
+              items={topOffers}
+              title="Top Offers"
+              subtitle="Best deals available"
+              badgeColor="from-red-500 to-red-600"
+              badgeIcon="🔥"
+              onItemClick={onItemClick}
+            />
           )}
         </div>
       </div>

@@ -43,7 +43,7 @@ const DesignerFabrics = () => {
 
       {/* Fabric Filters - Pre-filtered for Designer */}
       <div className="py-8">
-        <FabricFilterSection />
+        <FabricFilterSection onItemClick={handleItemClick} />
       </div>
       
       {/* Fabric Gallery */}

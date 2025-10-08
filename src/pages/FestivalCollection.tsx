@@ -146,7 +146,7 @@ const FestivalCollection = () => {
 
       {/* Fabric Filters - Pre-filtered for Festival */}
       <div className="py-8">
-        <FabricFilterSection />
+        <FabricFilterSection onItemClick={handleItemClick} />
       </div>
       
       {/* Fabric Gallery */}

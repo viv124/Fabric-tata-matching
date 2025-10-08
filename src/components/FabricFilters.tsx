@@ -9,8 +9,9 @@ import { Search, Filter, X, Star, Tag } from "lucide-react";
 import { useFabricItems, FabricFilters } from "@/hooks/useFabricItems";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { EnhancedFilters } from "./EnhancedFilters";
+import { HorizontalOfferGrid } from "./HorizontalOfferGrid";
 
-export const FabricFilterSection = () => {
+export const FabricFilterSection = ({ onItemClick }: { onItemClick: (item: any) => void }) => {
   const { categories, filters, updateFilters, clearFilters, fabricItems } = useFabricItems();
   const [showFilters, setShowFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState(filters.searchQuery || "");
@@ -34,7 +35,7 @@ export const FabricFilterSection = () => {
     }).length;
   };
 
-  const topOffers = fabricItems.filter(item => item.discount > 0).slice(0, 3);
+  const topOffers = fabricItems.filter(item => item.discount > 0).slice(0, 6);
 
   return (
     <>
@@ -130,47 +131,18 @@ export const FabricFilterSection = () => {
 
         {/* Advanced Filters - Desktop Only */}
         {showFilters && !isMobile && (
-          <EnhancedFilters isMobile={false} />
+          <EnhancedFilters isMobile={false} onItemClick={onItemClick} />
         )}
 
         {/* Top Offers Section */}
-        {topOffers.length > 0 && (
-          <Card className="card-gradient border-accent/20">
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Badge className="bg-gradient-to-r from-red-500 to-red-600 text-white">
-                  🔥 Top Offers
-                </Badge>
-                <span className="text-sm text-muted-foreground">Limited time deals</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {topOffers.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3 p-3 bg-muted/30 rounded-xl hover:bg-muted/50 transition-colors">
-                    <img 
-                      src={item.image_url} 
-                      alt={item.name}
-                      className="w-12 h-12 object-cover rounded-lg"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium text-sm line-clamp-1">{item.name}</p>
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold text-primary">
-                          ₹{(item.price * (1 - item.discount / 100)).toFixed(0)}
-                        </span>
-                        <span className="text-xs text-muted-foreground line-through">
-                          ₹{item.price.toFixed(0)}
-                        </span>
-                        <Badge className="text-xs bg-red-500 text-white">
-                          -{item.discount}%
-                        </Badge>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        <HorizontalOfferGrid
+          items={topOffers}
+          title="Top Offers"
+          subtitle="Best deals available"
+          badgeColor="from-red-500 to-red-600"
+          badgeIcon="🔥"
+          onItemClick={onItemClick}
+        />
       </div>
     </section>
     </>

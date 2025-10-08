@@ -49,7 +49,7 @@ const Cotton = () => {
 
       {/* Fabric Filters - Pre-filtered for Cotton */}
       <div className="py-8">
-        <FabricFilterSection />
+        <FabricFilterSection onItemClick={handleItemClick} />
       </div>
       
       {/* Fabric Gallery */}

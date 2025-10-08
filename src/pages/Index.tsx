@@ -165,7 +165,7 @@ const Index = () => {
       
       <FestivalBanners />
       
-      <FabricFilterSection />
+      <FabricFilterSection onItemClick={handleItemClick} />
       
       <FabricGallery 
         onItemClick={handleItemClick}
