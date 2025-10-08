@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -21,6 +21,12 @@ export const MultipleImageViewer = ({
   const allImages = [mainImage, ...additionalImages];
   const hasMultipleImages = allImages.length > 1;
 
+  // Touch handling for mobile swipe
+  const touchStartXRef = useRef<number | null>(null);
+  const touchStartYRef = useRef<number | null>(null);
+  const touchDeltaXRef = useRef<number>(0);
+  const isSwipingRef = useRef<boolean>(false);
+
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
   };
@@ -33,10 +39,54 @@ export const MultipleImageViewer = ({
     setCurrentImageIndex(index);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartXRef.current = touch.clientX;
+    touchStartYRef.current = touch.clientY;
+    touchDeltaXRef.current = 0;
+    isSwipingRef.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null || touchStartYRef.current === null) return;
+    const touch = e.touches[0];
+    const dx = touch.clientX - touchStartXRef.current;
+    const dy = touch.clientY - touchStartYRef.current;
+    // Consider horizontal swipe only if horizontal movement dominates
+    if (Math.abs(dx) > Math.abs(dy)) {
+      isSwipingRef.current = true;
+      touchDeltaXRef.current = dx;
+      // Prevent horizontal scroll while swiping images
+      e.preventDefault();
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!hasMultipleImages) return;
+    const threshold = 40; // minimum px to trigger swipe
+    const dx = touchDeltaXRef.current;
+    if (isSwipingRef.current && Math.abs(dx) > threshold) {
+      if (dx < 0) {
+        nextImage();
+      } else {
+        prevImage();
+      }
+    }
+    touchStartXRef.current = null;
+    touchStartYRef.current = null;
+    touchDeltaXRef.current = 0;
+    isSwipingRef.current = false;
+  };
+
   return (
     <div className={`space-y-3 ${className}`}>
       {/* Main Image Display */}
-      <div className="relative aspect-square overflow-hidden rounded-xl image-boutique group">
+      <div
+        className="relative aspect-square overflow-hidden rounded-xl image-boutique group"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <img
           src={allImages[currentImageIndex]}
           alt={`${itemName} - Image ${currentImageIndex + 1}`}
