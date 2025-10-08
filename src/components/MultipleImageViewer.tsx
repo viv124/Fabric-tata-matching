@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { OptimizedImage } from "./OptimizedImage";
 
 interface MultipleImageViewerProps {
   mainImage: string;
@@ -87,10 +88,12 @@ export const MultipleImageViewer = ({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <img
+        <OptimizedImage
           src={allImages[currentImageIndex]}
           alt={`${itemName} - Image ${currentImageIndex + 1}`}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          priority={currentImageIndex === 0}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         
         {/* Navigation arrows for multiple images */}
@@ -137,10 +140,12 @@ export const MultipleImageViewer = ({
               onClick={() => selectImage(index)}
             >
               <div className="w-16 h-16 overflow-hidden rounded-lg">
-                <img
+                <OptimizedImage
                   src={image}
                   alt={`${itemName} thumbnail ${index + 1}`}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
+                  sizes="64px"
+                  quality={60}
                 />
               </div>
             </Card>

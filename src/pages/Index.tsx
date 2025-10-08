@@ -99,7 +99,7 @@ const Index = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-background ${isMobile ? 'mobile-content' : ''}`}>
+    <div className={`min-h-screen bg-background ${isMobile ? 'mobile-content pb-20' : ''}`}>
       <Hero />
       
       {/* Music Player Section */}

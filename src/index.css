@@ -329,3 +329,59 @@
     display: none;
   }
 }
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+
+  /* Mobile bottom navigation safe area */
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Mobile image optimization */
+  .image-boutique img {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  /* Mobile touch targets */
+  .mobile-touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Mobile scroll optimization */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Mobile performance optimizations */
+  .mobile-optimized {
+    contain: layout style paint;
+    will-change: auto;
+  }
+
+  /* Mobile gallery optimizations */
+  .mobile-gallery {
+    contain: layout style;
+  }
+
+  /* Mobile image loading states */
+  .mobile-image-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+}
