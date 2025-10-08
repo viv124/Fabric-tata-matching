@@ -33,6 +33,15 @@ const Index = () => {
     fetchMusicFiles();
   }, []);
 
+  // Auto-play music when music files are loaded
+  useEffect(() => {
+    if (musicFiles.length > 0 && !selectedMusic) {
+      // Select the first music file by default
+      setSelectedMusic(musicFiles[0].id);
+      setIsMusicPlaying(true);
+    }
+  }, [musicFiles, selectedMusic]);
+
   useEffect(() => {
     if (selectedMusic && isMusicPlaying) {
       const music = musicFiles.find(m => m.id === selectedMusic);
@@ -188,7 +197,6 @@ const Index = () => {
           onSearchClick={() => setShowFilters(true)}
           onFilterClick={() => setShowFilters(true)}
           onWishlistClick={() => setShowFilters(true)}
-          wishlistCount={favorites.size}
         />
       )}
 

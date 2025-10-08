@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Home, Search, Heart, ShoppingBag, Menu } from "lucide-react";
+import { Home, Search, ShoppingBag, Menu } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -9,14 +8,12 @@ interface MobileBottomNavProps {
   onSearchClick?: () => void;
   onFilterClick?: () => void;
   onWishlistClick?: () => void;
-  wishlistCount?: number;
 }
 
 export const MobileBottomNav = ({ 
   onSearchClick, 
   onFilterClick, 
-  onWishlistClick,
-  wishlistCount = 0 
+  onWishlistClick
 }: MobileBottomNavProps) => {
   const location = useLocation();
   const { isAdmin } = useAuth();
@@ -33,13 +30,6 @@ export const MobileBottomNav = ({
       label: "Search",
       path: null,
       onClick: onSearchClick,
-    },
-    {
-      icon: Heart,
-      label: "Favorites",
-      path: null,
-      onClick: onWishlistClick,
-      badge: wishlistCount > 0 ? wishlistCount : undefined,
     },
     {
       icon: ShoppingBag,
@@ -77,26 +67,12 @@ export const MobileBottomNav = ({
             >
               {item.path ? (
                 <Link to={item.path} className="flex flex-col items-center gap-1">
-                  <div className="relative">
-                    <Icon className="h-5 w-5" />
-                    {item.badge && (
-                      <Badge className="absolute -top-2 -right-2 h-4 w-4 text-xs p-0 flex items-center justify-center bg-red-500 text-white">
-                        {item.badge}
-                      </Badge>
-                    )}
-                  </div>
+                  <Icon className="h-5 w-5" />
                   <span className="text-xs font-medium">{item.label}</span>
                 </Link>
               ) : (
                 <div className="flex flex-col items-center gap-1">
-                  <div className="relative">
-                    <Icon className="h-5 w-5" />
-                    {item.badge && (
-                      <Badge className="absolute -top-2 -right-2 h-4 w-4 text-xs p-0 flex items-center justify-center bg-red-500 text-white">
-                        {item.badge}
-                      </Badge>
-                    )}
-                  </div>
+                  <Icon className="h-5 w-5" />
                   <span className="text-xs font-medium">{item.label}</span>
                 </div>
               )}

@@ -76,7 +76,6 @@ const Cotton = () => {
           onSearchClick={() => setShowFilters(true)}
           onFilterClick={() => setShowFilters(true)}
           onWishlistClick={() => setShowFilters(true)}
-          wishlistCount={favorites.size}
         />
       )}
 
