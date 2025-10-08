@@ -8,12 +8,7 @@ export const SEO_CONFIG = {
     'astar dukaan bilimora',
     'best fabric in bilimora',
     'fabric matching center',
-    'bilimora textile shop',
-    'kapda bazar bilimora',
-    'best fabric near me',
-    'near fabric shop bilimora',
-    'kapda bazar navsari',
-    'fabric shop near bilimora'
+    'bilimora textile shop'
   ],
 
   // Secondary Keywords
@@ -52,16 +47,7 @@ export const SEO_CONFIG = {
     'fabric matching service bilimora',
     'Gujrat kapad dukan bilimora',
     'Surat Kapad shop',
-    'wholesale kapada surat',
-    'kapda bazar bilimora gujarat',
-    'best fabric shop in navsari district',
-    'near fabric shop bilimora 396321',
-    'kapda bazar near bilimora station',
-    'best fabric store bilimora navsari',
-    'fabric shop near me bilimora',
-    'kapda dukan near bilimora',
-    'textile shop bilimora navsari',
-    'fabric dealer bilimora gujarat'
+    'wholesale kapada surat'
   ],
 
   // Gujarati/Hindi Keywords
@@ -72,19 +58,14 @@ export const SEO_CONFIG = {
     'બીલીમોરા કપડા બજાર',
     'કપડા ડીલર બીલીમોરા',
     'બીલીમોરા ટેક્સટાઇલ શોપ',
-    'કપડા વ્હોલસેલ બીલીમોરા',
-    'કપડા બજાર બીલીમોરા',
-    'બેસ્ટ ફેબ્રિક બીલીમોરા',
-    'નજીક કપડા દુકાન બીલીમોરા',
-    'કપડા બજાર નવસારી',
-    'બીલીમોરા કપડા દુકાન 396321'
+    'કપડા વ્હોલસેલ બીલીમોરા'
   ],
 
   // Meta Information
   meta: {
     title: 'Tata Matching Center - Best Fabric Shop in Bilimora | Kapad Dukan | Astar Dukaan',
-    description: 'Tata Matching Center is Bilimora\'s premier fabric shop offering premium kapad, astar, and textile collection. Best fabric matching center near Bilimora with wholesale and retail services. Visit our kapad dukan for designer fabrics, wedding fabrics, and party wear materials. Kapda bazar bilimora, best fabric near me, fabric shop near bilimora.',
-    keywords: 'tata matching center, bilimora fabric shop, kapad dukan bilimora, astar dukaan bilimora, best fabric in bilimora, fabric matching center, bilimora textile shop, kapad wholesale bilimora, designer fabric bilimora, wedding fabric bilimora, party wear fabric bilimora, fabric dealer bilimora, textile dealer bilimora, bilimora fabric market, kapad store bilimora, kapda bazar bilimora, best fabric near me, near fabric shop bilimora, kapda bazar navsari, fabric shop near bilimora',
+    description: 'Tata Matching Center is Bilimora\'s premier fabric shop offering premium kapad, astar, and textile collection. Best fabric matching center near Bilimora with wholesale and retail services. Visit our kapad dukan for designer fabrics, wedding fabrics, and party wear materials.',
+    keywords: 'tata matching center, bilimora fabric shop, kapad dukan bilimora, astar dukaan bilimora, best fabric in bilimora, fabric matching center, bilimora textile shop, kapad wholesale bilimora, designer fabric bilimora, wedding fabric bilimora, party wear fabric bilimora, fabric dealer bilimora, textile dealer bilimora, bilimora fabric market, kapad store bilimora',
     author: 'Tata Matching Center',
     robots: 'index, follow',
     language: 'English',

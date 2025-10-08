@@ -14,8 +14,7 @@ export const SEOContent = () => {
             <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               Welcome to Tata Matching Center, Bilimora's premier fabric shop and kapad dukan. 
               We are the leading astar dukaan in Bilimora, offering the finest collection of 
-              designer fabrics, wedding fabrics, and party wear materials. As the best fabric shop 
-              in Bilimora and kapda bazar, we provide near fabric shop services with premium quality materials.
+              designer fabrics, wedding fabrics, and party wear materials.
             </p>
           </div>
 
@@ -190,12 +189,7 @@ export const SEOContent = () => {
               "Party Wear Fabric Bilimora",
               "Fabric Dealer Bilimora",
               "Kapad Wholesale Bilimora",
-              "Fabric Retail Bilimora",
-              "Kapda Bazar Bilimora",
-              "Best Fabric Near Me",
-              "Near Fabric Shop Bilimora",
-              "Kapda Bazar Navsari",
-              "Fabric Shop Near Bilimora"
+              "Fabric Retail Bilimora"
             ].map((keyword, index) => (
               <span 
                 key={index}

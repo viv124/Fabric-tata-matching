@@ -13,7 +13,6 @@ import DesignerFabrics from "./pages/DesignerFabrics";
 import FestivalCollection from "./pages/FestivalCollection";
 import BilimoraFabricShop from "./pages/BilimoraFabricShop";
 import KapadDukanBilimora from "./pages/KapadDukanBilimora";
-import KapdaBazarBilimora from "./pages/KapdaBazarBilimora";
 import Admin from "./pages/Admin";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
@@ -53,7 +52,6 @@ const App = () => {
               <Route path="/festival-collection" element={<FestivalCollection />} />
               <Route path="/bilimora-fabric-shop" element={<BilimoraFabricShop />} />
               <Route path="/kapad-dukan-bilimora" element={<KapadDukanBilimora />} />
-              <Route path="/kapda-bazar-bilimora" element={<KapdaBazarBilimora />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<Admin />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

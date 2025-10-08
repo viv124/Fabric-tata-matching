@@ -38,7 +38,7 @@ export const Hero = () => {
           </h1>
           
           <p className="font-elegant text-lg sm:text-2xl lg:text-3xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed font-light">
-            Best Fabric Shop in Bilimora • Kapda Bazar Bilimora • Premier Kapad Dukan • Astar Dukaan • Designer Fabrics Collection • Near Fabric Shop
+            Best Fabric Shop in Bilimora • Premier Kapad Dukan • Astar Dukaan • Designer Fabrics Collection
           </p>
           
           <p className="font-elegant text-base sm:text-lg lg:text-xl mb-8 text-white/80 max-w-3xl mx-auto leading-relaxed font-light">
